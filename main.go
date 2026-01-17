@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"ping-api/database"
 	"ping-api/middleware"
 	"ping-api/models"
@@ -10,6 +11,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/lpernett/godotenv"
 )
+
+func Hello(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Hello Ahmed from Gin",
+	})
+}
 
 func main() {
 	err := godotenv.Load()
@@ -28,6 +35,7 @@ func main() {
 
 	r := gin.Default()
 
+	r.GET("/", Hello)
 	r.POST("/api/register", user.Register)
 	r.POST("/api/login", user.Login)
 	r.GET("/api/me", middleware.IsUser, user.Me)

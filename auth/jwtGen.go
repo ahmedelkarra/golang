@@ -13,7 +13,7 @@ func JwtGen(id string) (string, error) {
 	err := godotenv.Load()
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("Error loading .env file")
 	}
 
 	secretKey := []byte(os.Getenv("secretKey"))
